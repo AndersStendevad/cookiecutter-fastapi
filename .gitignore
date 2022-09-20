@@ -133,5 +133,4 @@ dmypy.json
 
 # Other folders
 data/
-models/
 .tox/
