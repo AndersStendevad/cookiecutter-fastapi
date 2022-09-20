@@ -1,8 +1,7 @@
 """ Example for how to write models to use in API """
 from enum import Enum
-from uuid import uuid4, UUID
+from uuid import uuid4
 from pydantic import BaseModel, Field, ValidationError, validator, Extra
-from datetime import datetime
 
 
 class Gender(str, Enum):
@@ -15,9 +14,7 @@ class Gender(str, Enum):
 
 
 class User(BaseModel):
-    """User Model
-
-    """
+    """User Model"""
 
     id_: str = Field(default_factory=lambda: "user-" + uuid4().hex, alias="xt/id")
     name: str = Field(..., alias="user/name")
@@ -25,12 +22,14 @@ class User(BaseModel):
 
     @validator("name")
     def name_must_contain_space(cls, v):
+        """Makes sure that name has a space in it"""
         if " " not in v:
             raise ValidationError("must contain a space")
         return v.title()
 
     class Config:
         """Example for FastAPI"""
+
         extra = Extra.forbid
         schema_extra = {"example": {"user/name": "Alice Bob", "user/gender": "female"}}
 
@@ -45,6 +44,7 @@ class Book(BaseModel):
 
     class Config:
         """Example for FastAPI"""
+
         extra = Extra.forbid
         schema_extra = {
             "example": {
@@ -65,6 +65,7 @@ class Borrow(BaseModel):
 
     class Config:
         """Example for FastAPI"""
+
         extra = Extra.forbid
         schema_extra = {
             "example": {
