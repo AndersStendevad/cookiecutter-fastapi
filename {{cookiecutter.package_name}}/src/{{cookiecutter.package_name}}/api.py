@@ -1,12 +1,14 @@
 """ FastAPI"""
 
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
+from fastapi.security import OAuth2PasswordBearer
 
 from {{cookiecutter.package_name}}.models.model_example import User, Book, Borrow
 
 app = FastAPI()
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="dev")
+
 
 @app.get("/health")
 async def healthcheck():
