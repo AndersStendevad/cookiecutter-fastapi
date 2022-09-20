@@ -6,6 +6,7 @@ from {{cookiecutter.package_name}}.models.model_example import User, Book, Borro
 
 app = FastAPI()
 
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="dev")
 
 @app.get("/health")
 async def healthcheck():
@@ -14,7 +15,7 @@ async def healthcheck():
 
 
 @app.post("/user", status_code=202)
-async def create_user(user: User):
+async def create_user(user: User, token: str = Depends(oauth2_scheme)):
     """Create user endpoint
 
     Parameters
@@ -33,7 +34,7 @@ async def create_user(user: User):
 
 
 @app.get("/user/{user_id}", status_code=200)
-async def get_user(user_id):
+async def get_user(user_id, token: str = Depends(oauth2_scheme)):
     """Get user endpoint
 
     Parameters
@@ -52,7 +53,7 @@ async def get_user(user_id):
 
 
 @app.patch("/user/{user_id}", status_code=202)
-async def patch_user(user_id, user: User):
+async def patch_user(user_id, user: User, token: str = Depends(oauth2_scheme)):
     """Update user endpoint
 
     Parameters
@@ -73,7 +74,7 @@ async def patch_user(user_id, user: User):
 
 
 @app.post("/book", status_code=202)
-async def create_book(book: Book):
+async def create_book(book: Book, token: str = Depends(oauth2_scheme)):
     """Create book endpoint
 
     Parameters
@@ -92,7 +93,7 @@ async def create_book(book: Book):
 
 
 @app.get("/book/{book_id}", status_code=200)
-async def get_book(book_id):
+async def get_book(book_id, token: str = Depends(oauth2_scheme)):
     """Get book endpoint
 
     Parameters
@@ -111,7 +112,7 @@ async def get_book(book_id):
 
 
 @app.patch("/book/{book_id}", status_code=200)
-async def patch_book(book_id, book: Book):
+async def patch_book(book_id, book: Book, token: str = Depends(oauth2_scheme)):
     """Update user endpoint
 
     Parameters
@@ -132,7 +133,7 @@ async def patch_book(book_id, book: Book):
 
 
 @app.post("/borrow", status_code=202)
-async def create_borrow(borrow: Borrow):
+async def create_borrow(borrow: Borrow, token: str = Depends(oauth2_scheme)):
     """Create borrow endpoint
 
     Parameters
@@ -151,7 +152,7 @@ async def create_borrow(borrow: Borrow):
 
 
 @app.get("/borrow/{borrow_id}", status_code=200)
-async def get_borrow(borrow_id):
+async def get_borrow(borrow_id, token: str = Depends(oauth2_scheme)):
     """Get book endpoint
 
     Parameters
@@ -170,7 +171,7 @@ async def get_borrow(borrow_id):
 
 
 @app.patch("/borrow/{borrow_id}", status_code=200)
-async def patch_borrow(borrow_id, borrow: Borrow):
+async def patch_borrow(borrow_id, borrow: Borrow, token: str = Depends(oauth2_scheme)):
     """Update user endpoint
 
     Parameters
