@@ -1,6 +1,6 @@
-# cookiecutter-template
+# cookiecutter-fastapi
 
-A work in progress cookiecutter to be able to start a cookiecutter.
+A work in progress cookiecutter to create a FastAPI project.
 
 ## Install for development
 <code>pip install tox</code>
@@ -12,4 +12,4 @@ A work in progress cookiecutter to be able to start a cookiecutter.
 
 ## Use the cookiecutter
 
-<code>cookiecutter <PATH_TO_REPO / GIT_CLONE_LINK></code>
+<code>cookiecutter git@github.com:AndersStendevad/cookiecutter-fastapi.git</code>
